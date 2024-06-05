@@ -1,0 +1,143 @@
+
+
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accommodations</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'images/wayanad2.jpg'%}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ffffff;
+        }
+
+        ol {
+            list-style-type: none;
+            padding: 5px;
+            text-align: center;
+        }
+
+        li {
+            display:flexbox;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: center;
+            margin: 20px;
+            padding: 20px;
+            background-color: #5858584d;
+            border-radius: 3px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffff;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #0056b3;
+        }
+
+        .btn-container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .btn {
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 8px 16px;
+            background-color: #25048b;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #1a0d6e;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <br>
+    <br>
+    <h1 >Accomodations</h1>
+    <ol>
+        {% for stay in stays %}
+            <li ><big><a style="font-size: xx-large; color: white;" href="{% url 'stay-detail' stay.pk %}">{{ stay.name }}</a></big>
+               <p style="color: rgb(255, 255, 255);">Rs.{{ stay.cost_per_night }}/night</p>
+               <h8 style="color: rgb(255, 255, 255);" class="title">Click to reserve the stay!</h8>
+	
+                <div class="btn_container">
+                    <button class="btn" id="pay-btn">
+                        
+                        <a style="color: rgb(255, 255, 255);" href="{% url 'index' %}">Book Now!</a>
+                    </button>
+                </div></li>             
+        {% endfor %}
+    </ol>
+
+    <div class="btn-container">
+        <a style="color: rgb(255, 255, 255);" class="btn" href="{% url 'user_dashboard' %}">Back to Dashboard</a>
+    </div>
+    <br>
+    <br>
+    <br>
+    <br>
+    {% include 'footer.html' %}
+</body>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+	var options = {
+	
+	
+	key: "{{ razorpay_merchant_key }}",
+	
+	
+	amount: "{{ razorpay_amount }}",
+	currency: "{{ currency }}",
+	
+	
+	name: "Dj Razorpay",
+	
+	
+	order_id: "{{ razorpay_order_id }}",
+	callback_url: "{{ callback_url }}",
+	};
+	
+	
+	var rzp1 = new Razorpay(options);
+	
+	
+	document.getElementById("pay-btn").onclick = function (e) {
+	rzp1.open();
+	e.preventDefault();
+	};
+</script>
+
+</html>

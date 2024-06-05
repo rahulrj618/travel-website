@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Payment</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            padding: 0px;
+            margin: 0px;
+            font-family: cursive;
+        }
+        html, body {
+            height: 100%;
+        }
+        body {
+            background-color: #f1f5f8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .title {
+            text-align: center;
+            letter-spacing: 1px;
+        }
+
+        .btn_container {
+            padding: 20px;
+            text-align: center;
+        }
+        .btn {
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 10px 20px;
+            background-color: #78b0fa;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .date-form {
+            margin-top: 20px;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .date-input {
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="title">Click to reserve!</h1>
+
+    <!-- Stay Details -->
+    <ol>
+        {% for stay in stays %}
+            <li>
+                <big><a href="{% url 'stay-detail' stay.pk %}">{{ stay.name }}</a></big>
+                <p>Rs.{{ stay.cost_per_night }}/night</p>
+            </li>
+        {% endfor %}
+    </ol>
+
+    <!-- Date Form -->
+    <form class="date-form">
+        <input type="date" class="date-input" id="start-date" required>
+        <input type="date" class="date-input" id="end-date" required>
+    </form>
+
+    <!-- Payment Button -->
+    <div class="btn_container">
+        <form method="post">
+            {%csrf_token%}
+        <button class="btn" id="pay-btn">Book Now!</button>
+        </form>
+    </div>
+
+    <!-- Razorpay's Javascript code. -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+    <script>
+        var options = {
+            key: "{{ razorpay_merchant_key }}",
+            amount: "{{ razorpay_amount }}",
+            currency: "{{ currency }}",
+            name: "{{ store_name }}",
+            order_id: "{{ razorpay_order_id }}",
+            callback_url: "{{ callback_url }}",
+        };
+
+        var rzp1 = new Razorpay(options);
+
+        document.getElementById("pay-btn").onclick = function (e) {
+            // Check if start and end dates are selected
+            var startDate = document.getElementById("start-date").value;
+            var endDate = document.getElementById("end-date").value;
+
+            if (!startDate || !endDate) {
+                alert("Please select start and end dates.");
+            } else {
+                rzp1.open();
+            }
+
+            e.preventDefault();
+        };
+    </script>
+</body>
+</html>

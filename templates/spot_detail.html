@@ -1,0 +1,163 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ spot.name }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <style>
+        body {
+            
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url("{% static 'images/vythiri.jpg'%}");
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        
+        }
+
+        h1 {
+            background-size:cover;
+            background: rgba(0, 0, 0, 0.3);
+            text-align: center;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+
+        p {
+            text-align: center;
+            color: #b2e7f5;
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            text-align: left;
+            color: #ffffff;
+            margin-top: 40px;
+        }
+
+        .horizontal-grid {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+            
+        }
+
+        .grid-container {
+            border: 2px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            grid-gap: 20px;
+            justify-content: center;
+        }
+
+        .grid-item {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.279);
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .grid-item img {
+            max-width:min-content;
+            height: auto;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .grid-item:hover {
+            transform: scale(1.05);
+        }
+
+        a {
+            text-decoration: none;
+            color: #000000;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: #ffffff;
+        }
+
+        .btn-container {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn {
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 8px 16px;
+            background-color: #ffffff;
+            color: white;
+            font-size: 1.2em;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: background-color 0.3s ease;
+        }
+
+        .btn:hover {
+            background-color: #4ddbff;
+        }
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <br>
+    <br>
+    <br>
+
+    <h1>{{ spot.name }}</h1>
+    <p>{{ spot.description }}</p>
+
+    <div class="section-container">
+        <div class="section">
+            <h2>Restaurants</h2>
+            <div class="grid-container">
+                {% for restaurant in nearby_restaurants %}
+                    <div class="grid-item">
+                        <!-- <img src="{% static 'images/indiagate.jpg' %}" alt="{{ restaurant.name }}"> -->
+                        
+                        <a style="color: yellowgreen;" href="{% url 'restaurant-detail' restaurant_id=restaurant.id %}">{{ restaurant.name }}</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <br>
+        <br>
+
+        <div class="section">
+            <h2>Hotels & Resorts.</h2>
+            <div class="grid-container">
+                {% for stay in nearby_stays %}
+                    <div class="grid-item">
+                        <!-- <img src="{% static 'images/vythresort.jpg' %}" alt="{{ stay.name }}"> -->
+                        <a style="color: yellowgreen;" href="{% url 'stay-detail' stay_id=stay.id %}">{{ stay.name }} - ${{ stay.cost_per_night }}/night</a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+    <br>
+        <br>
+
+    <div class="btn-container">
+        <a style="color: white;" class="btn" href="{% url 'destination_list' %}">Back to Destination List</a>
+    </div>
+    <br>
+    <br> 
+    <br>
+    <br> 
+    {% include 'footer.html' %}
+</body>
+
+</html>

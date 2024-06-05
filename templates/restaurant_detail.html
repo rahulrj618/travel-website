@@ -1,0 +1,192 @@
+
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ stay.name }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        /* style.css */
+
+/* Reset some default browser styles */
+
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url("{% static 'images/restaurant1.jpg'%}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    
+    
+}
+
+form {
+    margin: 0 20px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+button {
+    background: #3498db;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin: 20px 0;
+}
+
+p {
+    text-align: left;
+    font-size: 18px;
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+.content-container {
+    max-width: 800px;
+    margin: 20px;
+}
+
+.reservation-title {
+    text-align: center;
+    color: #ffffff;
+    margin: 20px 0;
+}
+
+.btn-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: #78b0fa;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+
+
+/* Responsive Styles */
+@media only screen and (max-width: 600px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+   
+
+    form {
+        margin: 20px;
+    }
+        }
+       
+
+        section {
+            
+            padding: 50px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+        .destination-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: stretch;
+        }
+
+        .destination-item {
+            background-color: rgb(255, 255, 255);
+            flex: 0 0 calc(30% - 20px); /* Adjust width as needed */
+            margin: 10px;
+            background-color: rgba(0, 0, 0, 0.181);
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: left;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+        <br>
+        <br>
+
+    <div>
+
+        {% block content %}
+        <section id="destinations">
+            <div class="destination-container">
+                <div class="destination-item">
+                    <h1>{{ restaurant.name }}</h1>
+                    <br>
+                    <p>{{ restaurant.description }}</p>
+                    <br>
+                    <p>{{ restaurant.destination.name }}</p>
+                    <br>
+                </div>
+            </div>
+        </section>
+        {% endblock %}
+    </div>
+    <br>
+    <br> 
+	<br>
+    <br> 
+	
+	
+
+<p class="lead" style="text-align: center; color: red">
+    <a style="color: red;" href="{% url 'user_dashboard' %}">HOME</a>
+</p> 
+{% include 'footer.html' %}
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+
+</html>

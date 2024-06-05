@@ -1,0 +1,278 @@
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ stay.name }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <style>
+        /* style.css */
+
+/* Reset some default browser styles */
+html, body, div, h1, h2, h3, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url("{% static 'images/vythresort.jpg'%}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    animation: fadeOut 1s backwards;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+    
+}
+
+header {
+    background-color: #3498db;
+    color: white;
+    width: 100%;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+form {
+    margin: 0 20px;
+    flex-grow: 1;
+    text-align: center;
+}
+
+button {
+    background: #3498db;
+    border: none;
+    color: #ffffff;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+h1 {
+    text-align: center;
+    color: #ffffff;
+    margin: 20px 0;
+}
+
+p {
+    text-align: left;
+    font-size: 18px;
+    color: #ffffff;
+    margin: 10px 0;
+}
+
+.content-container {
+    max-width: 800px;
+    margin: 20px;
+}
+
+.reservation-title {
+    text-align: center;
+    color: #ffffff;
+    margin: 20px 0;
+}
+
+.btn-container {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn {
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: white;
+    font-size: 1.2em;
+    font-weight: 600;
+    letter-spacing: 1px;
+    background-color: #78b0fa;
+    transition: background-color 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+.footer-lead {
+    text-align: center;
+    color: red;
+    margin-top: 20px;
+}
+
+/* Responsive Styles */
+@media only screen and (max-width: 600px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+   
+
+    form {
+        margin: 20px;
+    }
+        }
+        nav {
+            
+            padding: 15px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+            z-index: 2;
+        }
+
+        section {
+            
+            padding: 50px;
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+        .destination-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+            align-items: stretch;
+        }
+
+        .destination-item {
+            background-color: black;
+            flex: 0 0 calc(30% - 20px); /* Adjust width as needed */
+            margin: 10px;
+            background-color: rgba(255, 255, 255, 0.15);
+            border: 1px solid #ddd;
+            padding: 20px;
+            text-align: left;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+    </style>
+</head>
+
+<body>
+    <nav class="d-flex justify-content-between">
+        <h2><a href="/">TravelHub</a></h2>
+        <div class="d-flex">
+          
+          <a href="aboutus/">About Us</a>
+          <a href="contactus/">Contact Us</a>
+          <a href="logout/">Logout</a>
+        </div>
+    </nav>
+        <br>
+        <br>
+
+    <div>
+
+        {% block content %}
+        <section id="destinations">
+            <div class="destination-container">
+                <div class="destination-item">
+                    <h1>{{ stay.name }}</h1>
+                    <br>
+                    <p>{{ stay.description }}</p>
+                    <br>
+                    <p>Cost per Night: ${{ stay.cost_per_night }}</p>
+                    <br>
+                </div>
+            </div>
+        </section>       
+            
+        {% endblock %}
+    </div>
+
+	
+	<h3 style="color: white;" title>Click to reserve the stay!</h3><br>
+		
+	<div class="btn_container">
+		
+		<button class="btn" id="pay-btn">            
+            <a href="{% url 'index' %}">Book Now!</a>
+        </button>
+	</div>
+    <br>
+    <br> 
+    <br>
+    <br> 
+
+	
+
+<p class="lead" style="text-align: center; color: red">
+    <a style="color: red;" href="{% url 'user_dashboard' %}">HOME</a>
+</p>
+<br>
+    <br> 
+{% include 'footer.html' %}
+</body>
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<!-- Razorpay's Javascript code. -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+	var options = {
+	
+	
+	key: "{{ razorpay_merchant_key }}",
+	
+	
+	amount: "{{ razorpay_amount }}",
+	currency: "{{ currency }}",
+	
+	
+	name: "Dj Razorpay",
+	
+	
+	order_id: "{{ razorpay_order_id }}",
+	callback_url: "{{ callback_url }}",
+	};
+	
+	
+	var rzp1 = new Razorpay(options);
+	
+	
+	document.getElementById("pay-btn").onclick = function (e) {
+	rzp1.open();
+	e.preventDefault();
+	};
+</script> 
+
+
+</html>

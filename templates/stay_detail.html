@@ -1,0 +1,123 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ stay.name }}</title>
+    <style>
+        /* your_custom_css_file.css */
+
+        body {
+    font-family: 'Arial', sans-serif;
+    background-image: url("{% static 'images/italy.jpg'%}");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+   
+    
+        }
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.stay-container {
+    background-color: rgba(0, 0, 0, 0.341);
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
+.reserve-message {
+    color: #08eea9;
+    text-align: center;
+}
+
+.button-container {
+    text-align: center;
+}
+
+.btn {
+    background-color: #4caf50;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.home-link {
+    text-align: center;
+    color: red;
+}
+h1,p{
+    color: white;
+}
+
+    </style>
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <div class="container">
+        <br>
+        <br>
+
+        <div class="stay-container">
+            {% block content %}
+                <h1 >{{ stay.name }}</h1>
+                <br>
+                <p>{{ stay.description }}</p>
+                <br>
+                <p>Cost per Night: ${{ stay.cost_per_night }}</p>
+                <br>
+            {% endblock %}
+            <h3 class="reserve-message" title>Click to reserve the stay!</h3><br>
+
+        <div class="button-container">
+            <button class="btn" id="pay-btn">
+                <a href="{% url 'index' %}">Book Now!</a>
+            </button>
+        </div>
+        </div>
+
+        
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <p class="home-link lead">
+            <a href="{% url 'user_dashboard' %}">HOME</a>
+        </p>
+        <br>
+        <br>
+    </div>
+
+    {% include 'footer.html' %}
+
+    <script>
+        var options = {
+            key: "{{ razorpay_merchant_key }}",
+            amount: "{{ razorpay_amount }}",
+            currency: "{{ currency }}",
+            name: "Dj Razorpay",
+            order_id: "{{ razorpay_order_id }}",
+            callback_url: "{{ callback_url }}",
+        };
+
+        var rzp1 = new Razorpay(options);
+
+        document.getElementById("pay-btn").onclick = function (e) {
+            rzp1.open();
+            e.preventDefault();
+        };
+    </script>
+</body>
+
+</html>

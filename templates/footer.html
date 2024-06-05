@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+        li {
+            color: black;
+            margin: 15px;
+            padding: 15px;
+            background-color: #ffffff48;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        li:hover {
+            transform: scale(1.05);
+        }
+
+        .site-footer {
+            background-color: #00000062;
+            padding: 45px 0 20px;
+            font-size: 15px;
+            line-height: 24px;
+            color: #ffffff;
+            margin-top: auto;
+        }
+
+        .site-footer hr {
+            border-top-color: #bbb;
+            opacity: 0.5;
+        }
+
+        .site-footer hr.small {
+            margin: 20px 0;
+        }
+
+        .site-footer h6 {
+            color: #fff;
+            font-size: 16px;
+            text-transform: uppercase;
+            margin-top: 5px;
+            letter-spacing: 2px;
+        }
+
+        .site-footer a {
+            color: #737373;
+        }
+
+        .site-footer a:hover {
+            color: #3366cc;
+            text-decoration: none;
+        }
+
+
+.footer-links
+{
+  padding-left:0;
+  list-style:none
+}
+.footer-links li
+{
+  display:block
+}
+.footer-links a
+{
+  color:#ffffff
+}
+.footer-links a:active,.footer-links a:focus,.footer-links a:hover
+{
+  color:#3366cc;
+  text-decoration:none;
+}
+.footer-links.inline li
+{
+  display:inline-block
+}
+.site-footer .social-icons
+{
+  text-align:right
+}
+.site-footer .social-icons a
+{
+  width:40px;
+  height:40px;
+  line-height:40px;
+  margin-left:6px;
+  margin-right:0;
+  border-radius:100%;
+  background-color:#33353d
+}
+.copyright-text
+{
+  margin:0
+}
+@media (max-width:991px)
+{
+  .site-footer [class^=col-]
+  {
+    margin-bottom:30px
+  }
+}
+@media (max-width:767px)
+{
+  .site-footer
+  {
+    padding-bottom:0
+  }
+  .site-footer .copyright-text,.site-footer .social-icons
+  {
+    text-align:center
+  }
+}
+span{
+  color: yellowgreen;
+}
+
+
+
+
+
+</style>
+<body> 
+<footer class="site-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-12 col-md-6">
+          <h6 style="color: yellowgreen;">About</h6>
+          <p class="text-justify">At Travel Hub, we believe in the magic of exploration, the thrill of discovery, 
+            and the joy of unforgettable experiences. Embark on a journey with us to uncover 
+            the world's hidden gems and create memories that last a lifetime.</p>
+            <br>
+            <br>
+            <br>
+            <header style="font-size: 500%;;">Travel<span>Hub</span></header>
+        </div>
+        <br>
+        <br>
+
+        <div class="col-xs-6 col-md-3">
+          <h6 style="color: yellowgreen;">Categories</h6>
+          <ul class="footer-links">
+            <li><a href="{% url 'destination_list' %}">Destinations</a></li>
+            <li><a href="{% url 'stay-list' %}">Accomadations</a></li>
+            <li><a href="{% url 'restaurant-list' %}">Restaurants</a></li>
+            <li><a href="{% url 'trip_list' %}">Tour Packages</a></li>
+            
+          </ul>
+        </div>
+
+        <div class="col-xs-6 col-md-3">
+          <h6 style="color: yellowgreen;">Quick Links</h6>
+          <ul class="footer-links">
+            <li><a href="{% url 'aboutus' %}">About Us</a></li>
+            <li><a href="{% url 'contactus' %}">Contact Us</a></li>            
+            <li><a href="/">Privacy Policy</a></li>
+            <li><a href="/">Sitemap</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-8 col-sm-6 col-xs-12">
+          <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by 
+       <a href="aboutus/">TravelHub</a>.
+          </p>
+        </div>
+
+    
+      </div>
+    </div>
+</footer>
+
+</body>
+</html>

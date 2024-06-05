@@ -1,0 +1,99 @@
+<!-- trip_list.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Packages</title>
+
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            animation: fadeOut 1s backwards;
+            background-color: rgba(0, 0, 0, 0.368);
+            background-image: url("{% static 'images/trip1.jpg'%}");
+            margin: 0;
+            padding: 0px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+        }
+
+        .trip-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .trip-card {
+            width: calc(33.33% - 20px); 
+            
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background-color: #00000043;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.152);
+        }
+
+        h3 {
+            color: #ffffff;
+        }
+
+        p {
+            margin: 10px 0;
+            color: white;
+        }
+
+        .mu-book-now-btn {
+            display: inline-block;
+            padding: 8px 16px;
+            background-color: #007bff;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        .mu-book-now-btn:hover {
+            background-color: #0056b3;
+        }
+
+        span{
+            color: rgb(255, 255, 255);
+        }
+    </style>
+</head>
+<body>
+    {% include 'navbar.html' %}
+    <br>
+    <br>
+    <h2 style="color: white;">Renowned Packages</h2>
+    <br>
+    <br>
+    <div class="trip-container">
+        {% for trip in trips %}
+        <div class="trip-card">
+            <h3>{{ trip.title }}</h3>
+            <p>Destination: <span>{{ trip.destination }}</span></p>
+            <p>Stay: <span>{{ trip.stays.all|join:", " }}</span></p>
+            <p>Organizer: <span>{{ trip.organizer }}</span></p>
+            <p>Total Cost: <span>Rs.{{ trip.total_cost }}</span></p>
+            <a href="{% url 'index' %}" class="mu-book-now-btn">Book Now</a>
+        </div>
+        {% endfor %}
+    </div>
+    <a style="color: rgb(255, 255, 255);" class="btn" href="{% url 'user_dashboard' %}">Back to Dashboard</a>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    {% include 'footer.html' %}
+</body>
+</html>

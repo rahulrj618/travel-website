@@ -1,0 +1,137 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TravelHub</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-image: url("{% static 'images/user1.jpg'%}");
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      animation: fadeOut 1s backwards;
+      background-color: rgba(0, 0, 0, 0.368);
+      
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+
+    nav {
+      padding: 15px;
+      z-index: 3;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-weight: bold;
+      z-index: 2;
+    }
+
+    .sections-container {
+      
+      display: flex;
+      gap: 20px;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      padding: 20px;
+    }
+
+    
+
+    section {
+      flex: 1;
+      padding: 20px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+      margin: 10px;
+      border-radius: 10px;
+      box-sizing: border-box;
+    }
+
+    a {
+      color: white;
+      transition: transform 0.3s ease;
+      
+    }
+
+    a:hover {
+      transform: scale(1.05);
+      color: rgb(221, 170, 170);
+    
+    }
+
+    section:hover
+    {
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  {% include 'navbar.html' %}
+
+  <div class="sections-container">
+    <section style="background-color: rgba(255, 255, 255, 0.26);" id="destinations">
+      <h2><a href="{% url 'destination_list' %}">Destinations</a></h2>
+      <p style="color: white;">Explore our amazing destinations.</p>
+    </section>
+
+    <section style="background-color: rgba(255, 255, 255, 0.26);"  id="accommodations">
+      <h2><a href="{% url 'stay-list' %}">Accommodations</a></h2>
+      <p style="color: white;">Discover comfortable accommodations for your stay.</p>
+      <!-- Add dynamic content here -->
+    </section>
+
+    <section style="background-color: rgba(255, 255, 255, 0.26);"  id="restaurants">
+      <h2><a href="{% url 'restaurant-list' %}">Restaurants</a></h2>
+      <p style="color: white;">Indulge in delicious meals at our recommended restaurants.</p>
+      <!-- Add dynamic content here -->
+    </section>    
+  </div>
+  <div class="sections-container">
+  <section style="background-color: rgba(255, 255, 255, 0.26);"  id="trips">
+    <h2><a href="{% url 'trip_list' %}">Packages</a></h2>
+    <p style="color: white;">Check out our most renowned packages.</p>
+    <!-- Add dynamic content here -->
+  </section>
+</div>
+<br>
+<br>
+<br>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+  {% include 'footer.html' %}
+</body>
+
+</html>
